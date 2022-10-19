@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/phaser@3.51.0/dist/phaser-arcade-physics.min.js"></script>
+    </head>
+    <body>
+    <script>
+        var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y:200}
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.setBaseURL('https://labs.phaser.io');
+
+    this.load.image('sky', 'assets/skies/gradient1.png');
+    this.load.image('ball', 'assets/demoscene/ball.png');
+    this.load.image('platform', 'assets/sprites/platform.png');
+    this.load.image('platform1', 'assets/sprites/planet1.png');
+    this.load.image('platform2', 'assets/sprites/planet2.png');
+    this.load.image('platform3', 'assets/sprites/planet3.png');
+    this.load.image('platform4', 'assets/sprites/poo.png');
+}
+
+function create ()
+{
+    this.add.image(400, 300, 'sky');
+    this.add.image(400, 100, 'platform');
+    this.add.image(300, 200, 'platform1');
+    this.add.image(500, 250, 'platform2');
+    this.add.image(200, 300, 'platform3');
+    this.add.image(150, 375, 'platform4');
+
+var particles = this.add.particles('yellow');
+
+var emitter = particles.createEmitter({
+    speed: 60,
+    scale: {start: 0.5, end: 0},
+    blendMode: 'ADD'
+});
+
+var ball = this.physics.add.image(400, 100, 'ball');
+
+ball.setVelocity(100, 200);
+ball.setBounce(0.5, 0.5);
+ball.setCollideWorldBounds(true);
+
+emitter.startFollow(ball);
+}
+
+var staticGrp = ('platform') + ('platform1') + ('platform2') + ('platform3') + ('platform4');
+
+staticGrp.setVelocity(0, 0);
+staticGrp.setBounce(0, 0);
+staticGrp.setCollideWorldBounds(false);
+
+function create ()
+{
+    this.add.image(400, 300, 'sky');
+    this.add.image(400, 100, 'platform');
+    this.add.image(300, 200, 'platform1');
+    this.add.image(500, 250, 'platform2');
+    this.add.image(200, 300, 'platform3');
+    this.add.image(150, 375, 'platform4');
+
+var particles = this.add.particles('yellow');
+
+var emitter = particles.createEmitter({
+    speed: 60,
+    scale: {start: 0.5, end: 0},
+    blendMode: 'ADD'
+});
+
+var ball = this.physics.add.image(400, 100, 'ball');
+
+ball.setVelocity(100, 200);
+ball.setBounce(0.5, 0.5);
+ball.setCollideWorldBounds(true);
+
+emitter.startFollow(ball);
+
+var staticGrp = ('platform') + ('platform1') + ('platform2') + ('platform3') + ('platform4');
+
+staticGrp.setVelocity(0, 0);
+staticGrp.setBounce(0, 0);
+staticGrp.setCollideWorldBounds(false);
+
+}
+    </script>
+    </body>
+</html>
